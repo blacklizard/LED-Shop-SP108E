@@ -22,7 +22,7 @@ A clone of LED Shop mobile app for macOS to control SP108E
 To launch the app on login, please add it to login item
 
 # Download
-Please download from release page 
+Please download from [release](https://github.com/blacklizard/LED-Shop-SP108E/releases) page
 
 # Disclamier
 The protocol was reverse engineered with wireshark and decompiled apk. This app is not by any means affiliated with spledapps
