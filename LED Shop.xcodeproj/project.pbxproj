@@ -11,6 +11,7 @@
 		330049042456C53E0062661D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330049032456C53E0062661D /* Constants.swift */; };
 		330049062456CDDC0062661D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330049052456CDDC0062661D /* String.swift */; };
 		335E648C2454CD12005DF11F /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335E648B2454CD12005DF11F /* Throttler.swift */; };
+		335F0B4D24755F080016F110 /* KeepAlive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F0B4C24755F080016F110 /* KeepAlive.swift */; };
 		337D7B552455D3950074A35A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7B542455D3950074A35A /* Color.swift */; };
 		337D7B5B2455ECBC0074A35A /* CG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D7B5A2455ECBC0074A35A /* CG.swift */; };
 		33A78D122453D929006F9AA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A78D112453D929006F9AA4 /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 		330049032456C53E0062661D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		330049052456CDDC0062661D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		335E648B2454CD12005DF11F /* Throttler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		335F0B4C24755F080016F110 /* KeepAlive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepAlive.swift; sourceTree = "<group>"; };
 		337D7B542455D3950074A35A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		337D7B5A2455ECBC0074A35A /* CG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CG.swift; sourceTree = "<group>"; };
 		33A78D0E2453D929006F9AA4 /* LED Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LED Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +128,7 @@
 				337D7B572455D53A0074A35A /* Utils */,
 				337D7B562455D52C0074A35A /* VIew */,
 				33C228F924570D4100E76D0F /* Credits.rtf */,
+				335F0B4C24755F080016F110 /* KeepAlive.swift */,
 			);
 			path = "LED Shop";
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				330049042456C53E0062661D /* Constants.swift in Sources */,
 				337D7B5B2455ECBC0074A35A /* CG.swift in Sources */,
 				33A78D122453D929006F9AA4 /* AppDelegate.swift in Sources */,
+				335F0B4D24755F080016F110 /* KeepAlive.swift in Sources */,
 				330049022456BE7C0062661D /* API.swift in Sources */,
 				337D7B552455D3950074A35A /* Color.swift in Sources */,
 			);
@@ -362,7 +366,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blacklizard.LED-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -382,7 +386,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.blacklizard.LED-Shop";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

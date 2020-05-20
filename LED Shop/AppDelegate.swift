@@ -13,27 +13,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	private var settingWindowController: NSWindowController?
 	private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-	private let tcp: TCPSocket = TCPSocket()
+    private let keepAlive:KeepAlive = KeepAlive()
 	
 	@IBOutlet weak var statusMenu: NSMenu!
 	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		attachStatusBarMenu()
 		registerObserver()
-		let startTimer = Timer.scheduledTimer(timeInterval: 5 , target: self, selector: #selector(self.onStartUp),userInfo: nil, repeats: false)
-		RunLoop.current.add(startTimer, forMode: RunLoop.Mode.common)
 		
 		let endpoint = UserDefaults.standard.string(forKey: "endpoint")
 		if(endpoint == nil) {
 			openSetting()
-		}
+        } else {
+            let startTimer = Timer.scheduledTimer(timeInterval: 5 , target: self, selector: #selector(self.onStartUp),userInfo: nil, repeats: false)
+            RunLoop.current.add(startTimer, forMode: RunLoop.Mode.common)
+        }
 	}
-	
-
-	func applicationWillTerminate(_ aNotification: Notification) {
-		onExit()
-		
-	}
+    
+    func applicationWillTerminate(_ aNotification: Notification) {
+        removeObserver()
+        onExit()
+    }
 	
 	@objc private func didWakeNotification(note: NSNotification) {
 		Timer.scheduledTimer(timeInterval: 5 , target: self, selector: #selector(self.onStartUp),userInfo: nil, repeats: false)
@@ -41,7 +41,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@objc private func willSleepNotification(note: NSNotification) {
 		onExit()
-		removeObserver()
 	}
 	
 	@objc private func toggle() {
@@ -49,6 +48,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	@objc private func onStartUp() {
+        print("onStartUp")
+        keepAlive.start()
 		let device: Device = API.shared.getDeviceConfig()
 		
 		if(device.state == 0) {
@@ -57,11 +58,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	private func onExit() {
+        print("onExit")
 		let device: Device = API.shared.getDeviceConfig()
 		
 		if(device.state == 1) {
 			toggle()
 		}
+        
+        keepAlive.stop()
 	}
 	
 	private func attachStatusBarMenu() {
@@ -72,13 +76,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 	
 	private func registerObserver() {
-		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didWakeNotification(note:)),name: NSWorkspace.didWakeNotification, object: nil)
-		NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(willSleepNotification(note:)),name: NSWorkspace.willSleepNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(didWakeNotification(note:)),name: NSWorkspace.didWakeNotification, object: nil)
+        NSWorkspace.shared.notificationCenter.addObserver(self, selector: #selector(willSleepNotification(note:)),name: NSWorkspace.willSleepNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onStartUp), name: NSNotification.Name("setting.complete"), object: nil)
 	}
 	
 	private func removeObserver() {
 		NotificationCenter.default.removeObserver(self, name: NSWorkspace.didWakeNotification, object: nil)
 		NotificationCenter.default.removeObserver(self, name: NSWorkspace.willSleepNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("setting.complete"), object: nil)
 	}
 	
 	@IBAction func toggleClicked(_ sender: NSMenuItem) {
@@ -94,6 +100,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		settingWindowController?.window?.makeKey()
 	}
 
-	
 }
 

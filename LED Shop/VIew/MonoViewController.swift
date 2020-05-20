@@ -76,6 +76,7 @@ extension MonoViewController: NSTextFieldDelegate {
 			if (textField == controllerIP && controllerIP.stringValue.isValidIPv4()) {
 				controllerIP.backgroundColor = .none
 				UserDefaults.standard.set(controllerIP.stringValue, forKey: "endpoint")
+                NotificationCenter.default.post(name: NSNotification.Name("setting.complete"), object: nil)
 			} else {
 				controllerIP.backgroundColor = .red
 			}
